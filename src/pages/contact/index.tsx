@@ -1,4 +1,3 @@
-import React from 'react'
 import ContactPage from './form'
 import Heading from '../../shared/heading'
 

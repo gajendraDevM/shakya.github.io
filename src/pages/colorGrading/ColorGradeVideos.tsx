@@ -1,7 +1,6 @@
 
 import Heading from '../../shared/heading'
 import YouTubePlayer from '../../shared/youtubaePlayer';
-import React from 'react';
 
 export default function ColorGradingVideos() {
 

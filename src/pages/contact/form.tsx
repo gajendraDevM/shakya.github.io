@@ -1,29 +1,72 @@
-import logo from "../../assets/about.png";
-import Heading from "../../shared/heading";
+
+import { useForm, ValidationError } from '@formspree/react';
+import { useEffect, useState } from 'react';
 
 function ContactPage() {
+
+
+
+  const [state, handleSubmit] = useForm("mbjvwdky") ;
+  const [disable, setDisabled] = useState(false)
+
+  useEffect(()=>{
+
+    if(state.succeeded || state.errors) {
+      setDisabled(true)
+    }
+    
+
+  }, [state])
+
+  
+  if (state.succeeded) {
+
+   
+       setTimeout(()=>{
+
+        window.location.reload()
+
+       }, 5000)
+
+  }
+
+
   return (
       <div className="container pb-6 mx-auto md:px-6">
   <section className="mb-32 ">
-   
+{ state.errors &&  <ValidationError 
+        prefix="Message" 
+        field="message"
+        errors={state.errors}
+      /> }
+    { state.succeeded && <div className="alert alert-success mb-3">
+      <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span>Thank you for reaching out! We've received your message and will get back to you shortly</span>
+    </div>}
     <div className="flex flex-wrap">
       <div className=" w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
-        <form>
+        <form onSubmit={handleSubmit}>
         <div className="mb-2">
             <label className="block text-gray-700 mb-2" htmlFor="name">Name</label>
-            <input className="input input-bordered w-full" type="text" id="name" placeholder="Name" />
+            <input className="input input-bordered w-full" type="text" name="name" id="name" placeholder="Name" />
           </div>
+
+          <div className="mb-2">
+            <label className="block text-gray-700 mb-2" htmlFor="name">Phone Number</label>
+            <input className="input input-bordered w-full" type="text" name="ph_number" id="ph_number" placeholder="Name" />
+          </div>
+
           <div className="mb-2">
             <label className="block text-gray-700 mb-2" htmlFor="subject">Email</label>
-            <input className="input input-bordered w-full" type="text" id="email" placeholder="Email" />
+            <input name="email"  className="input input-bordered w-full" type="email" id="email" placeholder="Email" />
           </div>
           <div className="mb-2">
 <label className="block text-gray-700 mb-2" htmlFor="message">Message</label>
-<textarea className="textarea textarea-bordered w-full" id="message" placeholder="Your Message" rows={5}></textarea>
+<textarea name="message"  className="textarea textarea-bordered w-full" id="message" placeholder="Your Message" rows={5}></textarea>
 </div>
 
 
-          <button type="button" data-te-ripple-init data-te-ripple-color="light"
+          <button    type="submit" disabled={disable} data-te-ripple-init data-te-ripple-color="light"
             className="mb-6 inline-block w-full rounded bg-[#d6af2d] px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-[#000] shadow-[0_4px_9px_-4px_#303030] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
             Send
           </button>

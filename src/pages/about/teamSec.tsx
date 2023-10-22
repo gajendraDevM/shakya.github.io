@@ -1,5 +1,4 @@
 import Slider from 'react-slick';
-import logo from '../../assets/logo.png'
 import Heading from '../../shared/heading';
 
 function TeamSection() {

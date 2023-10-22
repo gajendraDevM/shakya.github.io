@@ -1,4 +1,3 @@
-import Header from '../../shared/header'
 import About from './about'
 import TeamSection from './teamSec'
 

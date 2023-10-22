@@ -17,7 +17,17 @@ export default {
         'accent':'#020A0F',
         'second':'#0a1318'
 
-      }
+      },
+
+      animation: {
+        'scroll-left': 'scroll-left 10s linear infinite',
+      },
+      keyframes: {
+        slide: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+      },
     },
   },
   plugins: [require("daisyui")],

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import {
@@ -93,10 +93,10 @@ export default function NavlinkComponent() {
 ]
   return (
     <div className="relative p-1 ">
-      <div className=' flex justify-between items-center px-2'>
+      <div className=' flex justify-between items-center px-2 bg-[#000]'>
     
 
-      {!isMobileMenuOpen && <img src={logo} alt="" className='w-9'/>  } 
+      {!isMobileMenuOpen && <div className='flex justify-center items-center gap-x-2'><img src={logo} alt="" className='w-[80px] '/> <h3 className='text-xl'>Shakya Studio </h3></div>   } 
       <button
         onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
         className="lg:hidden p-2"
@@ -110,11 +110,11 @@ export default function NavlinkComponent() {
         <div className="fixed z-30 h-screen top-0 left-0 w-64 bg-[#202020] shadow-md lg:hidden">
             <div className='p-4 '>
                 {/* <div className='flex justify-between items-center mb-4'> */}
-            <img src={logo} alt="" className='w-[130px]'/>   
+            <img src={logo} alt="" className='w-[190px]'/>   
             <MdClose className="text-2xl absolute right-4 top-4 "    onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} />
             {/* </div> */}
             <br/>
-            <br/>
+          
             <ul>
             {navData.map((item, i) => {
                 const { icon: Iconcomponent } = item;

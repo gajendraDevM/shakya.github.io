@@ -1,4 +1,3 @@
-import React from 'react'
 import Heading from '../../shared/heading'
 
 export default function Vacancies() {
