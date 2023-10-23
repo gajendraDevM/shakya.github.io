@@ -1,6 +1,7 @@
 
 import { useForm, ValidationError } from '@formspree/react';
 import { useEffect, useState } from 'react';
+import { FaWhatsapp, FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 function ContactPage() {
 
@@ -31,9 +32,39 @@ function ContactPage() {
   }
 
 
+  const socialmedia = [
+    
+    {
+      icon:FaWhatsapp,
+      link:"",
+      color:"text-[#009113]",
+      title:"Whatsapp"
+    },
+    {
+    icon:FaFacebook,
+    link:"",
+    color:"text-[#1877F2]",
+    title:"Facebook"
+  },
+  {
+    icon:FaInstagram,
+    link:"",
+    color:"text-[#fc179c]",
+    title:"Instagram"
+
+  },
+  {
+    icon:FaYoutube,
+    link:"",
+    color:"text-[#C4302b]",
+    title:"Youtube"
+
+  }]
+
+
   return (
-      <div className="container pb-6 mx-auto md:px-6">
-  <section className="mb-32 ">
+      <div className="container md:w-[60%] pb-6 mx-auto md:px-6">
+  <section className="mb-8 ">
 { state.errors &&  <ValidationError 
         prefix="Message" 
         field="message"
@@ -43,131 +74,80 @@ function ContactPage() {
       <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
       <span>Thank you for reaching out! We've received your message and will get back to you shortly</span>
     </div>}
-    <div className="flex flex-wrap">
-      <div className=" w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
+    <div className="grid grid-cols-7 gap-x-5">
+      <div className=" col-span-5">
         <form onSubmit={handleSubmit}>
-        <div className="mb-2">
-            <label className="block text-gray-700 mb-2" htmlFor="name">Name</label>
-            <input className="input input-bordered w-full" type="text" name="name" id="name" placeholder="Name" />
+
+          <div className='flex items-center justify-between gap-x-4'>
+        <div className="mb-2 w-full">
+            <label className="block text-gray-700 mb-2" htmlFor="first_name">First Name*</label>
+            <input className="input required input-bordered w-full" type="text" name="name" id="name" placeholder="First Name" />
           </div>
 
-          <div className="mb-2">
-            <label className="block text-gray-700 mb-2" htmlFor="name">Phone Number</label>
-            <input className="input input-bordered w-full" type="text" name="ph_number" id="ph_number" placeholder="Name" />
+          <div className="mb-2 w-full">
+            <label className="block text-gray-700 mb-2" htmlFor="last_name">Last Name</label>
+            <input className="input input-bordered w-full" type="text" name="name" id="name" placeholder="Last Name" />
+          </div>
+</div>
+
+
+<div className='flex items-center justify-between gap-x-4'>
+
+          <div className="mb-2 w-full ">
+            <label className="block text-gray-700 mb-2" htmlFor="name">Contact Number*</label>
+            <input className="input required input-bordered w-full" type="tel" name="ph_number" id="ph_number" placeholder="Contact Number" pattern="^\d{10}$" required />
           </div>
 
-          <div className="mb-2">
-            <label className="block text-gray-700 mb-2" htmlFor="subject">Email</label>
-            <input name="email"  className="input input-bordered w-full" type="email" id="email" placeholder="Email" />
+          <div className="mb-2 w-full">
+            <label className="block text-gray-700 mb-2" htmlFor="subject">Email*</label>
+            <input name="email" required  className="input input-bordered w-full" type="email" id="email" placeholder="Email"
+             pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+             title="Please enter a valid email address in the format: name@domain.tld."
+             />
           </div>
+
+
+          </div>
+
+          
           <div className="mb-2">
 <label className="block text-gray-700 mb-2" htmlFor="message">Message</label>
 <textarea name="message"  className="textarea textarea-bordered w-full" id="message" placeholder="Your Message" rows={5}></textarea>
 </div>
 
-
+<br/>
           <button    type="submit" disabled={disable} data-te-ripple-init data-te-ripple-color="light"
-            className="mb-6 inline-block w-full rounded bg-[#d6af2d] px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-[#000] shadow-[0_4px_9px_-4px_#303030] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-            Send
+            className="mb-6 font-bold inline-block w-full rounded bg-[#d6af2d] px-6 pt-2.5 pb-2 text-xs  uppercase leading-normal text-[#000] shadow-[0_4px_9px_-4px_#303030] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+            Send Message
           </button>
         </form>
       </div>
-      <div className="w-full shrink-0 grow-0 basis-auto lg:w-7/12 mt-6">
-        <div className="flex flex-wrap">
-          <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:px-6">
-            <div className="flex items-start">
-              <div className="shrink-0">
-                <div className="inline-block rounded-md bg-primary-100 p-4 text-brand">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M14.25 9.75v-4.5m0 4.5h4.5m-4.5 0l6-6m-3 18c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 014.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 00-.38 1.21 12.035 12.035 0 007.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 011.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 01-2.25 2.25h-2.25z" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-6 grow">
-                <p className="mb-2 font-bold dark:text-white">
-                  Technical support
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-200">
-                  support@example.com
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-200">
-                  +1 234-567-89
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:px-6">
-            <div className="flex items-start">
-              <div className="shrink-0">
-                <div className="inline-block rounded-md bg-primary-100 p-4 text-brand">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-6 grow">
-                <p className="mb-2 font-bold dark:text-white">
-                  Sales questions
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-200">
-                  sales@example.com
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-200">
-                  +1 234-567-89
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:px-6">
-            <div className="align-start flex">
-              <div className="shrink-0">
-                <div className="inline-block rounded-md bg-primary-100 p-4 text-brand">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-6 grow">
-                <p className="mb-2 font-bold dark:text-white">Press</p>
-                <p className="text-neutral-500 dark:text-neutral-200">
-                  press@example.com
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-200">
-                  +1 234-567-89
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:px-6">
-            <div className="align-start flex">
-              <div className="shrink-0">
-                <div className="inline-block rounded-md bg-primary-100 p-4 text-brand">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M12 12.75c1.148 0 2.278.08 3.383.237 1.037.146 1.866.966 1.866 2.013 0 3.728-2.35 6.75-5.25 6.75S6.75 18.728 6.75 15c0-1.046.83-1.867 1.866-2.013A24.204 24.204 0 0112 12.75zm0 0c2.883 0 5.647.508 8.207 1.44a23.91 23.91 0 01-1.152 6.06M12 12.75c-2.883 0-5.647.508-8.208 1.44.125 2.104.52 4.136 1.153 6.06M12 12.75a2.25 2.25 0 002.248-2.354M12 12.75a2.25 2.25 0 01-2.248-2.354M12 8.25c.995 0 1.971-.08 2.922-.236.403-.066.74-.358.795-.762a3.778 3.778 0 00-.399-2.25M12 8.25c-.995 0-1.97-.08-2.922-.236-.402-.066-.74-.358-.795-.762a3.734 3.734 0 01.4-2.253M12 8.25a2.25 2.25 0 00-2.248 2.146M12 8.25a2.25 2.25 0 012.248 2.146M8.683 5a6.032 6.032 0 01-1.155-1.002c.07-.63.27-1.222.574-1.747m.581 2.749A3.75 3.75 0 0115.318 5m0 0c.427-.283.815-.62 1.155-.999a4.471 4.471 0 00-.575-1.752M4.921 6a24.048 24.048 0 00-.392 3.314c1.668.546 3.416.914 5.223 1.082M19.08 6c.205 1.08.337 2.187.392 3.314a23.882 23.882 0 01-5.223 1.082" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-6 grow">
-                <p className="mb-2 font-bold dark:text-white">Bug report</p>
-                <p className="text-neutral-500 dark:text-neutral-200">
-                  bugs@example.com
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-200">
-                  +1 234-567-89
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    
+<div className='flex justify-center items-center col-span-2 p-2 bg-[#0e0e0e] rounded ' >
+<div>
+  
+<div className=" p-5 rounded-lg text-gray-400  text-center  ">
+    Stay connected and updated with our latest news by following us on our social media links.
+</div>
+
+<br/>
+<ul className='flex justify-center flex-col items-center gap-y-4'>
+  {
+    socialmedia.map((item, i)=>{
+
+      const {icon:SocialIcon} = item
+
+      return <li key={i} className=' flex gap-x-4 items-center justify-start '>
+        <SocialIcon className={` text-3xl text-[#000]  cursor-pointer rounded-full bg-brand p-[5px]`}/>
+      <h2 className='text-left'>{item.title}</h2>
+      
+      </li>
+    })
+  }
+</ul></div>
+
+</div>
+
     </div>
   </section>
 </div>

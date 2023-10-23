@@ -70,7 +70,7 @@ export default function Footer() {
       const {icon:SocialIcon} = item
 
       return <li key={i} className=' '>
-        <SocialIcon className={`text-white text-xl  cursor-pointer ${item.color}`}/>
+        <SocialIcon className={` text-3xl text-[#000]  cursor-pointer rounded-full bg-brand p-[5px]`}/>
       </li>
     })
   }

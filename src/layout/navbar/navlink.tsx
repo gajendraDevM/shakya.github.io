@@ -95,12 +95,12 @@ export default function NavlinkComponent() {
 
                             return  item?.children ? 
                             
-                             <li tabIndex={0} key={i}>
-                      <details className='text-[16px]'>
-                      <summary>
+                             <li tabIndex={0} key={i} className=''>
+                      <div className='text-[16px] dropdown dropdown-hover '>
+                      <summary className=' flex justify-center items-center flex-col'>
                      
-                                <Iconcomponent className="text-2xl"/>{item.label} </summary>
-                        <ul className="p-2 ">
+                                <Iconcomponent className="text-3xl"/>{item.label} </summary>
+                        <ul className="p-2 top-[67px] -left-4 dropdown-content z-[1] menu shadow bg-[#2e2e2e] rounded  ">
 
                             {
                                 item.children?.map((submenu, k)=>{
@@ -121,7 +121,7 @@ export default function NavlinkComponent() {
                             }
                         
                         </ul>
-                      </details>
+                      </div>
                     </li>
                             
                             :<li><NavLink
@@ -131,8 +131,8 @@ export default function NavlinkComponent() {
                             to={item.path}>{item.logo? <div className='flex flex-col  justify-center items-center'><img src={item.logo} alt="" className='w-28'/>
                             <h2 className='uppercase  text-md mt-1 tracking-widest '>Shakya Studio</h2>
                             </div>  :
-                            <div className='flex  gap-x-2 items-end justify-center text-[16px]' >
-                                <Iconcomponent className="text-2xl"/>{item.label}</div>} </NavLink></li>
+                            <div className=' flex justify-center items-center flex-col text-[16px]' >
+                                <Iconcomponent className="text-3xl"/>{item.label}</div>} </NavLink></li>
                         })
                     }
                  
