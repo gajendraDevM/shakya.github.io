@@ -14,6 +14,7 @@ import Jobs from "./pages/jobs";
 import Courses from "./pages/courses";
 import Career from "./pages/career";
 import Films from "./pages/films";
+import Form from "./shared/form";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/films",
         element: <Films/>,
+      }, 
+        {
+        path: "/form",
+        element: <Form/>,
       },
     ],
   },
