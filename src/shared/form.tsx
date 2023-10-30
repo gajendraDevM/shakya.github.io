@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useLocation } from 'react-router-dom';
+import FileUploadComponent from './fileUpload';
+import { useState } from 'react';
 
 
 function useQuery() {
@@ -9,7 +11,9 @@ function useQuery() {
 export default function Form() {
 
     const query = useQuery();
-   
+    const [imgurl, setImgurl] = useState<any>()
+    const [success, setSuccess] = useState<any>(false)
+
     const paramValue = query.get("job_title");
     const {
         register,
@@ -20,9 +24,11 @@ export default function Form() {
 
       const onSubmit = async (data: any) =>{
 
-
+           data.resume_file = imgurl
         const url = "https://formspree.io/f/mbjvwdky"; // replace with your endpoint
      
+        console.log({data});
+        
     
         try {
             const response = await fetch(url, {
@@ -38,7 +44,14 @@ export default function Form() {
             }
     
             const responseData = await response.json();
-            console.log(responseData);
+
+
+            setSuccess(true)
+            setTimeout(()=>{
+
+              window.location.reload()
+      
+             }, 5000)
     
         } catch (error:any) {
             console.error('There was a problem with the fetch operation:', error.message);
@@ -47,14 +60,22 @@ export default function Form() {
 
       }
 
-   
+      const onSuccess = (res:any) =>{
+
+        setImgurl(res)
+
+
+      }
 
 
   return (
     <div className='container-base' >
 <br/>
 
-
+ { success && <div className="alert alert-success mb-3">
+      <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span>Thank you for reaching out! We've received your message and will get back to you shortly</span>
+    </div>}
       <h2>Job Title: <b className='text-brand ml-2'>{paramValue}</b></h2>
       <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -84,10 +105,10 @@ export default function Form() {
           </div>
 </div>
 
-<div className='flex items-center justify-between gap-x-4 my-4'>
-<label className="block text-gray-300 mb-2" htmlFor="subject">Gender: </label>
+<div className='md:flex items-center justify-between gap-x-4 my-4'>
+<label className="block text-gray-300 my-4 md:my-0 " htmlFor="subject">Gender: </label>
 
-        <div className="mb-2 w-full flex items-center gap-x-5">
+        <div className=" w-full flex items-center gap-x-5">
 
         <input 
     type="radio" 
@@ -110,10 +131,8 @@ export default function Form() {
 
 
 
-
-          <div className="mb-2 w-full flex items-center gap-x-5">
-
-          <label className="block text-gray-300 " htmlFor="subject">Work Experience: </label>
+          <label className="block text-gray-300 my-4 md:my-0 " htmlFor="subject"> Experience: </label>
+          <div className=" w-full flex items-center gap-x-5">
 
           <input 
     type="radio" 
@@ -132,17 +151,17 @@ export default function Form() {
 />
 <label htmlFor="experienced">Experienced</label>
 
-<div className=" w-[30%]">
+
+</div>
+
+        
+</div>
+
+<div className=" md:w-[30%]">
             <input className="input required input-bordered w-full" type="text" {...register("total_year_experince")} id="total_year_experince" placeholder="Total Experince" />
           </div>
 
-
-          </div>
-</div>
-
-
-
-<div className='flex items-center justify-between my-4 gap-x-4'>
+<div className='md:flex items-center justify-between my-4 gap-x-4'>
         <div className="mb-2 w-full">
             <input className="input required input-bordered w-full" type="text" {...register("add_video_url_first")} id="add video url_one" placeholder="Add video url 1" />
           </div>
@@ -158,11 +177,11 @@ export default function Form() {
 
 
 
-<div className='flex items-center  justify-between gap-4 mb-4'>
-        <div className="mb-2 w-[50%]">
+<div className='md:flex items-center  justify-between gap-4 mb-4'>
+        <div className="mb-2 md:w-[50%]">
         <textarea name="address"  className="textarea textarea-bordered w-full" id="address" placeholder="Your Address" rows={4}></textarea>
           </div>
-<div className='w-[50%]'>
+<div className='md:w-[50%]'>
           <div className=" w-full flex items-center justify-between gap-4 mb-2">
             <input  className="input input-bordered w-full mb-2" type="text" {...register("qualification")} id="qualification" placeholder="Qualification" />
           
@@ -172,9 +191,17 @@ export default function Form() {
             <input  className="input input-bordered w-full" type="text" {...register("year_graduate")} id="year_graduate" placeholder="Year Graduate" />
 </div>
          </div> 
-</div>
 
-            <input className="bg-[#5f5f5f] cursor-pointer text-gray-100 hover:text-gray-800 px-8 py-2 rounded-full hover:bg-yellow-600" type="submit" />
+
+
+</div>
+<FileUploadComponent onSuccess={(onSuccess)}/>
+
+
+<br/>
+
+
+            <input disabled={success} className="bg-[#5f5f5f] cursor-pointer text-gray-100 hover:text-gray-800 px-8 py-2 rounded-full hover:bg-yellow-600" type="submit" />
 
 </form>
     </div>

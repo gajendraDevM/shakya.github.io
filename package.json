@@ -12,6 +12,10 @@
   },
   "dependencies": {
     "@formspree/react": "^2.5.1",
+    "firebase": "^8.7.1",
+    "imagekit-javascript": "^2.0.0",
+    "imagekitio-react": "^3.0.0",
+    "rc-upload": "^4.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
@@ -22,6 +26,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@types/firebase": "^3.2.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@types/react-slick": "^0.23.10",
