@@ -18,8 +18,8 @@ export default function Form() {
     const {
         register,
         handleSubmit,
-        watch,
-        formState: { errors },
+        // watch,
+        // formState: { errors },
       } = useForm<any>()
 
       const onSubmit = async (data: any) =>{
@@ -43,7 +43,7 @@ export default function Form() {
                 throw new Error('Network response was not ok');
             }
     
-            const responseData = await response.json();
+            // const responseData = await response.json();
 
 
             setSuccess(true)

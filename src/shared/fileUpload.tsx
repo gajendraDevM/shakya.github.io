@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import storage from './firebase'
 import Upload from 'rc-upload'
 import {GrAttachment} from 'react-icons/gr'
 export default function fileUpload({onSuccess}:any) {
 
-    const [imgurl, setImgurl] = useState<any>()
-    const [loading1, setLoading1] = useState(false)
+    // const [imgurl, setImgurl] = useState<any>()
+    // const [loading1, setLoading1] = useState(false)
     const [file_name, setFileName] = useState()
 
 
@@ -24,7 +24,7 @@ export default function fileUpload({onSuccess}:any) {
 
           onSuccess(url)
 
-          setLoading1(false)
+          // setLoading1(false)
     
         })
         .catch(error => {
