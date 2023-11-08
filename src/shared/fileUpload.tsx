@@ -42,7 +42,7 @@ export default function fileUpload({onSuccess}:any) {
   return (
     <div>
 
-<Upload customRequest={customRequest}>
+<Upload required customRequest={customRequest}>
                 <button className="file-input file-input-bordered file-input-warning w-full max-w-xs" >
                      {file_name? <div className='flex items-center justify-center gap-x-4 '><GrAttachment className="text-xl text-gray-100"/> 
                      {file_name}</div>  : 'Upload'} </button>

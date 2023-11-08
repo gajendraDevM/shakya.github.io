@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useLocation } from 'react-router-dom';
 import FileUploadComponent from './fileUpload';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function useQuery() {
@@ -14,19 +14,38 @@ export default function Form() {
     const [imgurl, setImgurl] = useState<any>()
     const [success, setSuccess] = useState<any>(false)
 
+let error:any = {}
     const paramValue = query.get("job_title");
     const {
         register,
         handleSubmit,
         // watch,
-        // formState: { errors },
+        formState: { errors },
       } = useForm<any>()
+
+
+      useEffect(()=>{
+
+        error = errors
+        console.log({errors});
+
+      }, [errors])
 
       const onSubmit = async (data: any) =>{
 
+        if(!imgurl){
+
+          alert('resume file required!')
+          
+          
+
+
+        }
+
            data.resume_file = imgurl
-        const url = "https://formspree.io/f/mbjvwdky"; // replace with your endpoint
-     
+           data.job_title =  paramValue
+        // const url = "https://formspree.io/f/mbjvwdky"; // replace with your endpoint
+     const url = "https://shakya-email-server.onrender.com/sendEmail";
         console.log({data});
         
     
@@ -42,8 +61,8 @@ export default function Form() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-    
-            // const responseData = await response.json();
+  
+            
 
 
             setSuccess(true)
@@ -76,32 +95,53 @@ export default function Form() {
       <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
       <span>Thank you for reaching out! We've received your message and will get back to you shortly</span>
     </div>}
+
+
+
+
+  <div>
+  {Object.keys(errors).map((key:any)=>{
+
+    return <div className="alert alert-error mb-3">
+    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+    <span>{ errors ? ` ${key} ${errors[key]?.type}` : ''}</span>
+  </div>
+  })}
+</div> 
+
+
+
+
+
+
+
+
       <h2>Job Title: <b className='text-brand ml-2'>{paramValue}</b></h2>
       <form onSubmit={handleSubmit(onSubmit)}>
 
             <div className='flex items-center justify-between gap-x-4 my-4'>
         <div className="mb-2 w-full">
-            <input className="input required input-bordered w-full" type="text" {...register("first_name")} id="first_name" placeholder="First Name" />
+            <input className="input required input-bordered w-full" type="text" {...register("first_name", { required: true, maxLength: 20 })} id="first_name" placeholder="First Name" />
           </div>
 
           <div className="mb-2 w-full">
             <input
             
             
-            className="input input-bordered w-full" type="text" {...register("last_name")} id="last_name" placeholder="Last Name" />
+            className="input input-bordered w-full" type="text" {...register("last_name", { required: false, maxLength: 20 })} id="last_name" placeholder="Last Name" />
           </div>
 </div>
 
 <div className='flex items-center justify-between gap-x-4'>
         <div className="mb-2 w-full">
-            <input className="input required input-bordered w-full" type="text" {...register("email")} id="email" placeholder="email" />
+            <input className="input required input-bordered w-full" type="text" {...register("email", { required: true, maxLength: 20, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i  })} id="email" placeholder="email" />
           </div>
 
           <div className="mb-2 w-full">
             <input
             
-            
-            className="input input-bordered w-full" type="text" {...register("ph_no")} id="ph_no" placeholder="Phone Number" />
+            required
+            className="input input-bordered w-full" type="text" {...register("ph_no", { required: true, maxLength: 10 })} id="ph_no" placeholder="Phone Number" />
           </div>
 </div>
 
