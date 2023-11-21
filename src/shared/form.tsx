@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useLocation } from 'react-router-dom';
 import FileUploadComponent from './fileUpload';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 
 
 function useQuery() {
@@ -14,7 +14,6 @@ export default function Form() {
     const [imgurl, setImgurl] = useState<any>()
     const [success, setSuccess] = useState<any>(false)
 
-let error:any = {}
     const paramValue = query.get("job_title");
     const {
         register,
@@ -24,12 +23,6 @@ let error:any = {}
       } = useForm<any>()
 
 
-      useEffect(()=>{
-
-        error = errors
-        console.log({errors});
-
-      }, [errors])
 
       const onSubmit = async (data: any) =>{
 
@@ -215,7 +208,18 @@ let error:any = {}
 </div>
 
 
+<div className='md:flex items-center justify-between my-4 gap-x-4'>
+        <div className="mb-2 w-full">
+            <input className="input required input-bordered w-full" type="text" {...register("district")} id="district" placeholder="District" />
+          </div>
 
+          <div className="mb-2 w-full">
+            <input
+            
+            
+            className="input input-bordered w-full" type="text" {...register("state")} id="state" placeholder="State" />
+          </div>
+</div>
 
 <div className='md:flex items-center  justify-between gap-4 mb-4'>
         <div className="mb-2 md:w-[50%]">

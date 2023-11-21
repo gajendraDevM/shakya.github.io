@@ -63,7 +63,7 @@ function ContactPage() {
 
 
   return (
-      <div className="container md:w-[60%] pb-6 mx-auto md:px-6">
+      <div className="container md:w-[60%] pb-6 mx-auto md:px-6 ">
   <section className="mb-8 ">
 { state.errors &&  <ValidationError 
         prefix="Message" 
